@@ -108,21 +108,24 @@ public class Sort <T extends Comparable<T>> {
     public void merge(T[] array, int p, int q, int r){
         int n1 = q-p+1;
         int n2 = r-q;
+        int j = 0;
         T[ ] left =  (T[]) Array.newInstance(Comparable.class, n1+1);
-        for(int i=0; i<n1; i++) {
-            left[i]=array[i];
+        for(int i=p; i<=q; i++) {
+            left[j]=array[i];
+            j++;
         }
         //left[n1] = MAX_VALUE;
         T[ ] right = (T[]) Array.newInstance(Comparable.class, n2+1);
-        int j = 0;
-        for(int i=n1+1; i<=q; i++) {
+        j=0;
+        for(int i=q+1; i<=r; i++) {
             right[j]=array[i];
             j++;
         }
         //right[n2] = MAX_VALUE;
         int i=0;
+        j =0;
         for(int k =p; k<r; k++){
-            if(left[i].compareTo(right[i])<0 || right[i]==null){
+            if(right[j]==null || left[i].compareTo(right[j])<=0 ){
                 array[k] = left[i];
                 i++;
             } else {
@@ -147,3 +150,4 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 }
+
