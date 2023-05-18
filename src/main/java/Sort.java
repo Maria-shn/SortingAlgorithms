@@ -162,5 +162,25 @@ public class Sort <T extends Comparable<T>> {
             }
         }
     }
+    private static boolean countSort(int[] array, int base, int place){
+        boolean done = true;
+        int[] keys = new int[base];
+        for (int i = 0; i < base; i++){
+            keys[i] = 0;
+        }
+        int factor = Math.pow(base, place);
+        for (int i = 0; i < array.length; i ++){
+            keys[array[i]]++;
+        }
+        for(int i =1; i<array.length; i++){
+            keys[i] = keys[i] + keys[i-1];
+        }
+        int[] result = new int[array.length];
+        for(int i =n; i>=0; i--){
+            result[keys[array[n]]] = array[n];
+            keys[array[n]]--;
+        }
+    }
+
 }
 
