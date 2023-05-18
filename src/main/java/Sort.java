@@ -1,27 +1,33 @@
 import java.lang.reflect.Array;
 
-public class Sort <T extends Comparable<T>> {
+public class Sort<T extends Comparable<T>> {
 
+    // Perform quicksort using the class-based implementation
     public void quickSortClass(T[] array){
         quickSortClass(array, 0, array.length-1);
     }
 
+    // Perform quicksort using the recitation-based implementation
     public void quickSortRecitation(T[] array){
         quickSortRecitation(array, 0, array.length-1);
     }
 
+    // Perform merge sort recursively
     public void mergeSortRecursive(T[] array){
         mergeSortRecursive(array, 0, array.length-1);
     }
 
+    // Perform radix sort on an array of integers with a given base
     public static void radixSort(int[] array, int base){
 
     }
 
+    // Set the threshold for using naive sort in quicksort
     public void setNaiveSortThreshold(int threshold){
 
     }
     
+    // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
     public void simpleSort(T[] array, int p, int r){
         for(int i = 0; i<array.length; i++){
             for (int j = i+1; j<array.length; j++){
@@ -34,6 +40,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Perform count sort on an array of integers with a given base and place value
     private static void countSort(int[] array, int base, int place){
         boolean done = true;
         int[] keys = new int[base];
@@ -55,6 +62,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Perform quicksort using the class-based implementation on a subarray from index first to last
     public void quickSortClass(T[] array, int first, int last){
         if (first - last > 3){
             int q = partitionClass(array, first, last);
@@ -65,6 +73,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Perform quicksort using the recitation-based implementation on a subarray from index first to last
     public void quickSortRecitation(T[] array, int first, int last){
         if (first - last > 3){
             int q = partitionRecitation(array, first, last);
@@ -75,6 +84,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Partition the array using the class-based implementation of quicksort
     public int partitionClass(T[] array, int p, int r){
         T x = array[r];
         int j = r-1;
@@ -99,6 +109,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Partition the array using the recitation-based implementation of quicksort
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
         int i = p-1;
@@ -117,7 +128,8 @@ public class Sort <T extends Comparable<T>> {
     }
 
 
-    public void  mergeSortRecursive(T[] array, int p, int r){
+    // Perform merge sort recursively on a subarray from index p to r
+    public void mergeSortRecursive(T[] array, int p, int r){
         if(p < r){
             int q = (p + r) / 2;
             mergeSortRecursive(array, p, q);
@@ -131,6 +143,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Perform merge sort iteratively on the given array
     public void mergeSortIterative(T[] array){
         int size = array.length;
         System.err.println(size);
@@ -146,6 +159,7 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
+    // Merge two sorted subarrays within the array from index p to q and from index q+1 to r
     public void merge(T[] array, int p, int q, int r){
         int n1 = q - p + 1;
         int n2 = r - q;
@@ -177,4 +191,5 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 }
+
 
