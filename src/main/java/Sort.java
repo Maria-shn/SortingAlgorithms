@@ -2,29 +2,42 @@ import java.lang.reflect.Array;
 
 public class Sort<T extends Comparable<T>> {
 
+    private int naiveSortThreshold;
+
     // Perform quicksort using the class-based implementation
     public void quickSortClass(T[] array){
+        if(array.length<= this.naiveSortThreshold){
+            simpleSort(array, 0, array.length);
+        } else{
         quickSortClass(array, 0, array.length-1);
-    }
+    }}
 
     // Perform quicksort using the recitation-based implementation
     public void quickSortRecitation(T[] array){
+        if(array.length<= this.naiveSortThreshold){
+            simpleSort(array, 0, array.length);
+        } else{
         quickSortRecitation(array, 0, array.length-1);
     }
+}
 
     // Perform merge sort recursively
     public void mergeSortRecursive(T[] array){
+        if(array.length<= this.naiveSortThreshold){
+            simpleSort(array, 0, array.length);
+        } else{
         mergeSortRecursive(array, 0, array.length-1);
-    }
+    }}
 
     // Perform radix sort on an array of integers with a given base
     public static void radixSort(int[] array, int base){
+        
 
     }
 
     // Set the threshold for using naive sort in quicksort
     public void setNaiveSortThreshold(int threshold){
-
+        this.naiveSortThreshold = threshold;
     }
     
     // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
