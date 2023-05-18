@@ -10,35 +10,29 @@ public class Sort <T extends Comparable<T>> {
         quickSortRecitation(array, 0, array.length-1);
     }
 
+    private static void countSort(int[] array, int base, int place){
+        boolean done = true;
+        int[] keys = new int[base];
+        for (int i = 0; i < base; i++){
+            keys[i] = 0;
+        }
+        //int factor = Math.pow(base, place);
+        for (int i = 0; i < array.length; i ++){
+            keys[array[i]]++;
+        }
+        for(int i =1; i<array.length; i++){
+            keys[i] = keys[i] + keys[i-1];
+        }
+        int[] result = new int[array.length];
+        int n = array.length-1;
+        for(int i =n; i>=0; i--){
+            result[keys[array[n]]] = array[n];
+            keys[array[n]]--;
+        }
+    }
+
     public static void radixSort(int[] array, int base){
 
-    }
-    
-    public void mergeSortRecursive(T[] array){
-        mergeSortRecursive(array, 0, array.length-1);
-    }
-/*
-    public void mergeSortIterative(T[] array){
-        int size = array.length;
-        //sizes of the arrays we will merge
-        for(int iterSize = 2; iterSize< size-1; iterSize *=2){
-                    for(int leftIndex = 0; leftIndex< size-1; leftIndex +=iterSize){
-                        int endRightIndex = Math.min(leftIndex + 2*iterSize, size-1);
-                        int middleIndex =  (int) ((leftIndex+ endRightIndex)/2);
-                        merge(array, leftIndex, middleIndex, endRightIndex);
-        }
-    }
-    }*/
-    public void mergeSortIterative(T[] array){
-        int size = array.length;
-        //sizes of the arrays we will merge
-        for(int iterSize = 2; iterSize <= size; iterSize *= 2){
-            for(int leftIndex = 0; leftIndex <= size - iterSize; leftIndex += iterSize){
-                int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
-                int middleIndex =  Math.min(size - 1, leftIndex + (iterSize / 2) - 1);
-                merge(array, leftIndex, middleIndex, endRightIndex);
-            }
-        }
     }
 
     public void setNaiveSortThreshold(int threshold){
@@ -105,6 +99,10 @@ public class Sort <T extends Comparable<T>> {
         }
         return i+1;
     }
+        
+    public void mergeSortRecursive(T[] array){
+        mergeSortRecursive(array, 0, array.length-1);
+    }
 
     public void  mergeSortRecursive(T[] array, int p, int r){
         if(p < r){
@@ -119,6 +117,19 @@ public class Sort <T extends Comparable<T>> {
             System.out.println("}");
         }
     }
+
+    public void mergeSortIterative(T[] array){
+        int size = array.length;
+        //sizes of the arrays we will merge
+        for(int iterSize = 2; iterSize <= size; iterSize *= 2){
+            for(int leftIndex = 0; leftIndex <= size - iterSize; leftIndex += iterSize){
+                int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
+                int middleIndex =  Math.min(size - 1, leftIndex + (iterSize / 2) - 1);
+                merge(array, leftIndex, middleIndex, endRightIndex);
+            }
+        }
+    }
+
 
     public void merge(T[] array, int p, int q, int r){
         int n1 = q - p + 1;
@@ -160,26 +171,6 @@ public class Sort <T extends Comparable<T>> {
                     array[i] = array[j];
                 }
             }
-        }
-    }
-    private static void countSort(int[] array, int base, int place){
-        boolean done = true;
-        int[] keys = new int[base];
-        for (int i = 0; i < base; i++){
-            keys[i] = 0;
-        }
-        //int factor = Math.pow(base, place);
-        for (int i = 0; i < array.length; i ++){
-            keys[array[i]]++;
-        }
-        for(int i =1; i<array.length; i++){
-            keys[i] = keys[i] + keys[i-1];
-        }
-        int[] result = new int[array.length];
-        int n = array.length-1;
-        for(int i =n; i>=0; i--){
-            result[keys[array[n]]] = array[n];
-            keys[array[n]]--;
         }
     }
 
