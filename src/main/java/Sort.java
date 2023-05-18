@@ -162,7 +162,7 @@ public class Sort <T extends Comparable<T>> {
             }
         }
     }
-    private static boolean countSort(int[] array, int base, int place){
+    private static void countSort(int[] array, int base, int place){
         boolean done = true;
         int[] keys = new int[base];
         for (int i = 0; i < base; i++){
