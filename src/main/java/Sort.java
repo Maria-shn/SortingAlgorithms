@@ -1,8 +1,7 @@
 import java.lang.reflect.Array;
 
-
-
 public class Sort <T extends Comparable<T>> {
+
     public void quickSortClass(T[] array){
         quickSortClass(array, 0, array.length-1);
     }
@@ -18,7 +17,7 @@ public class Sort <T extends Comparable<T>> {
     public void mergeSortRecursive(T[] array){
         mergeSortRecursive(array, 0, array.length-1);
     }
-
+/*
     public void mergeSortIterative(T[] array){
         int size = array.length;
         //sizes of the arrays we will merge
@@ -29,6 +28,17 @@ public class Sort <T extends Comparable<T>> {
                         merge(array, leftIndex, middleIndex, endRightIndex);
         }
     }
+    }*/
+    public void mergeSortIterative(T[] array){
+        int size = array.length;
+        //sizes of the arrays we will merge
+        for(int iterSize = 2; iterSize <= size; iterSize *= 2){
+            for(int leftIndex = 0; leftIndex <= size - iterSize; leftIndex += iterSize){
+                int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
+                int middleIndex =  leftIndex + (iterSize / 2) - 1;
+                merge(array, leftIndex, middleIndex, endRightIndex);
+            }
+        }
     }
 
     public void setNaiveSortThreshold(int threshold){
@@ -97,35 +107,41 @@ public class Sort <T extends Comparable<T>> {
     }
 
     public void  mergeSortRecursive(T[] array, int p, int r){
-        if(p<r){
-            int q = (p+r)/2;
+        if(p < r){
+            int q = (p + r) / 2;
             mergeSortRecursive(array, p, q);
             mergeSortRecursive(array, q+1, r);
             merge(array, p, q, r);
+            System.out.print("{ ");
+            for (int i = 0; i < array.length; i++){
+                System.out.print(array[i] + " ");
+            }
+            System.out.println("}");
         }
     }
 
     public void merge(T[] array, int p, int q, int r){
-        int n1 = q-p+1;
-        int n2 = r-q;
+        int n1 = q - p + 1;
+        int n2 = r - q;
         int j = 0;
-        T[ ] left =  (T[]) Array.newInstance(Comparable.class, n1+1);
-        for(int i=p; i<=q; i++) {
-            left[j]=array[i];
+        T[] left = (T[]) Array.newInstance(Comparable.class, n1);
+        for(int i = p; i <= q; i++) {
+            left[j] = array[i];
             j++;
         }
-        //left[n1] = MAX_VALUE;
-        T[ ] right = (T[]) Array.newInstance(Comparable.class, n2+1);
-        j=0;
-        for(int i=q+1; i<=r; i++) {
-            right[j]=array[i];
+        T[ ] right = (T[]) Array.newInstance(Comparable.class, n2);
+        j = 0;
+        for(int i = q+1; i <= r; i++) {
+            right[j] = array[i];
             j++;
         }
-        //right[n2] = MAX_VALUE;
-        int i=0;
-        j =0;
-        for(int k =p; k<r; k++){
-            if(right[j]==null || left[i].compareTo(right[j])<=0 ){
+        int i = 0;
+        j = 0;
+        for(int k = p; k <= r; k++){
+            if(i == left.length){
+                array[k] = right[j];
+                j++;
+            } else if(j == right.length || left[i].compareTo(right[j])<=0 ){
                 array[k] = left[i];
                 i++;
             } else {
@@ -133,9 +149,6 @@ public class Sort <T extends Comparable<T>> {
                 j++;
             }
         }
-
-
-        
     }
 
     public void simpleSort(T[] array, int p, int r){
