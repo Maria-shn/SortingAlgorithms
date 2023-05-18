@@ -64,22 +64,25 @@ public class Sort<T extends Comparable<T>> {
         for (int i = 0; i < base; i++){
             keys[i] = 0;
         }
-        //int factor = Math.pow(base, place);
-        for (int i = 0; i < array.length; i ++){
+        for (int i = 0; i < array.length; i++){
             keys[keyOf(array[i], base, place)]++;
         }
         for(int i = 1; i < keys.length; i++){
             keys[i] = keys[i] + keys[i-1];
         }
         int[] result = new int[array.length];
-        int n = array.length-1;
-        for(int i = n; i>=0; i--){
-            result[keys[keyOf(array[i], base, place)]] = array[i];
-            keys[array[i]]--;
+        int n = array.length - 1;
+        for(int i = n; i >= 0; i--){
+            result[keys[keyOf(array[i], base, place)] - 1] = array[i];
+            keys[keyOf(array[i], base, place)]--;
         }
         for(int i = 0; i < result.length; i++){
             array[i] = result[i];
+            if ((array[i] / (int) Math.pow(base, place)) != 0){
+                done = false;
+            }
         }
+
         return done;
     }
 
@@ -161,11 +164,8 @@ public class Sort<T extends Comparable<T>> {
             mergeSortRecursive(array, p, q);
             mergeSortRecursive(array, q+1, r);
             merge(array, p, q, r);
-            System.out.print("{ ");
             for (int i = 0; i < array.length; i++){
-                System.out.print(array[i] + " ");
             }
-            System.out.println("}");
         }
     }
 
