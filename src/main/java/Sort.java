@@ -168,7 +168,7 @@ public class Sort <T extends Comparable<T>> {
         for (int i = 0; i < base; i++){
             keys[i] = 0;
         }
-        int factor = Math.pow(base, place);
+        //int factor = Math.pow(base, place);
         for (int i = 0; i < array.length; i ++){
             keys[array[i]]++;
         }
@@ -176,6 +176,7 @@ public class Sort <T extends Comparable<T>> {
             keys[i] = keys[i] + keys[i-1];
         }
         int[] result = new int[array.length];
+        int n = array.length-1;
         for(int i =n; i>=0; i--){
             result[keys[array[n]]] = array[n];
             keys[array[n]]--;
