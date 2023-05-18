@@ -35,7 +35,7 @@ public class Sort <T extends Comparable<T>> {
         for(int iterSize = 2; iterSize <= size; iterSize *= 2){
             for(int leftIndex = 0; leftIndex <= size - iterSize; leftIndex += iterSize){
                 int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
-                int middleIndex =  leftIndex + (iterSize / 2) - 1;
+                int middleIndex =  Math.min(size - 1, leftIndex + (iterSize / 2) - 1);
                 merge(array, leftIndex, middleIndex, endRightIndex);
             }
         }
