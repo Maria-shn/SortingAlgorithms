@@ -10,6 +10,30 @@ public class Sort <T extends Comparable<T>> {
         quickSortRecitation(array, 0, array.length-1);
     }
 
+    public void mergeSortRecursive(T[] array){
+        mergeSortRecursive(array, 0, array.length-1);
+    }
+
+    public static void radixSort(int[] array, int base){
+
+    }
+
+    public void setNaiveSortThreshold(int threshold){
+
+    }
+    
+    public void simpleSort(T[] array, int p, int r){
+        for(int i = 0; i<array.length; i++){
+            for (int j = i+1; j<array.length; j++){
+                if(array[j].compareTo(array[i])<0){
+                    T temp = array[j];
+                    array[j] = array[i];
+                    array[i] = array[j];
+                }
+            }
+        }
+    }
+
     private static void countSort(int[] array, int base, int place){
         boolean done = true;
         int[] keys = new int[base];
@@ -31,17 +55,19 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
-    public static void radixSort(int[] array, int base){
-
-    }
-
-    public void setNaiveSortThreshold(int threshold){
-
-    }
-
     public void quickSortClass(T[] array, int first, int last){
         if (first - last > 3){
             int q = partitionClass(array, first, last);
+            quickSortClass(array, first, q-1);
+            quickSortClass(array, q+1, last);
+        }else{
+            simpleSort(array, first, last);
+        }
+    }
+
+    public void quickSortRecitation(T[] array, int first, int last){
+        if (first - last > 3){
+            int q = partitionRecitation(array, first, last);
             quickSortClass(array, first, q-1);
             quickSortClass(array, q+1, last);
         }else{
@@ -73,16 +99,6 @@ public class Sort <T extends Comparable<T>> {
         }
     }
 
-    public void quickSortRecitation(T[] array, int first, int last){
-        if (first - last > 3){
-            int q = partitionRecitation(array, first, last);
-            quickSortClass(array, first, q-1);
-            quickSortClass(array, q+1, last);
-        }else{
-            simpleSort(array, first, last);
-        }
-    }
-
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
         int i = p-1;
@@ -99,10 +115,7 @@ public class Sort <T extends Comparable<T>> {
         }
         return i+1;
     }
-        
-    public void mergeSortRecursive(T[] array){
-        mergeSortRecursive(array, 0, array.length-1);
-    }
+
 
     public void  mergeSortRecursive(T[] array, int p, int r){
         if(p < r){
@@ -120,16 +133,18 @@ public class Sort <T extends Comparable<T>> {
 
     public void mergeSortIterative(T[] array){
         int size = array.length;
+        System.err.println(size);
         //sizes of the arrays we will merge
-        for(int iterSize = 2; iterSize <= size; iterSize *= 2){
-            for(int leftIndex = 0; leftIndex <= size - iterSize; leftIndex += iterSize){
+        for(int iterSize = 2; iterSize < (size * 2) - 1; iterSize *= 2){
+            System.out.println("SIZE: " + iterSize);
+            for(int leftIndex = 0; leftIndex <= size - 1; leftIndex += iterSize){
                 int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
                 int middleIndex =  Math.min(size - 1, leftIndex + (iterSize / 2) - 1);
                 merge(array, leftIndex, middleIndex, endRightIndex);
+                System.out.println("left:" + leftIndex + "  mid:" + middleIndex + "  right:" + endRightIndex);
             }
         }
     }
-
 
     public void merge(T[] array, int p, int q, int r){
         int n1 = q - p + 1;
@@ -161,18 +176,5 @@ public class Sort <T extends Comparable<T>> {
             }
         }
     }
-
-    public void simpleSort(T[] array, int p, int r){
-        for(int i = 0; i<array.length; i++){
-            for (int j = i+1; j<array.length; j++){
-                if(array[j].compareTo(array[i])<0){
-                    T temp = array[j];
-                    array[j] = array[i];
-                    array[i] = array[j];
-                }
-            }
-        }
-    }
-
 }
 
