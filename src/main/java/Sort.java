@@ -31,8 +31,12 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform radix sort on an array of integers with a given base
     public static void radixSort(int[] array, int base){
-        
-
+        boolean done = false;
+        int place = 0;
+        while (done == false){
+            done = countSort(array, base, place);
+            place++;
+        }
     }
 
     // Set the threshold for using naive sort in quicksort
@@ -54,7 +58,7 @@ public class Sort<T extends Comparable<T>> {
     }
 
     // Perform count sort on an array of integers with a given base and place value
-    private static void countSort(int[] array, int base, int place){
+    private static boolean countSort(int[] array, int base, int place){
         boolean done = true;
         int[] keys = new int[base];
         for (int i = 0; i < base; i++){
@@ -62,17 +66,26 @@ public class Sort<T extends Comparable<T>> {
         }
         //int factor = Math.pow(base, place);
         for (int i = 0; i < array.length; i ++){
-            keys[array[i]]++;
+            keys[keyOf(array[i], base, place)]++;
         }
-        for(int i =1; i<array.length; i++){
+        for(int i = 1; i < keys.length; i++){
             keys[i] = keys[i] + keys[i-1];
         }
         int[] result = new int[array.length];
         int n = array.length-1;
-        for(int i =n; i>=0; i--){
-            result[keys[array[n]]] = array[n];
-            keys[array[n]]--;
+        for(int i = n; i>=0; i--){
+            result[keys[keyOf(array[i], base, place)]] = array[i];
+            keys[array[i]]--;
         }
+        for(int i = 0; i < result.length; i++){
+            array[i] = result[i];
+        }
+        return done;
+    }
+
+    private static int keyOf(int i, int base, int power){
+        int x = (i / (int) Math.pow(base, power));
+        return (x % base);
     }
 
     // Perform quicksort using the class-based implementation on a subarray from index first to last
@@ -159,15 +172,12 @@ public class Sort<T extends Comparable<T>> {
     // Perform merge sort iteratively on the given array
     public void mergeSortIterative(T[] array){
         int size = array.length;
-        System.err.println(size);
         //sizes of the arrays we will merge
         for(int iterSize = 2; iterSize < (size * 2) - 1; iterSize *= 2){
-            System.out.println("SIZE: " + iterSize);
             for(int leftIndex = 0; leftIndex <= size - 1; leftIndex += iterSize){
                 int endRightIndex = Math.min(size - 1, leftIndex + iterSize - 1);
                 int middleIndex =  Math.min(size - 1, leftIndex + (iterSize / 2) - 1);
                 merge(array, leftIndex, middleIndex, endRightIndex);
-                System.out.println("left:" + leftIndex + "  mid:" + middleIndex + "  right:" + endRightIndex);
             }
         }
     }
