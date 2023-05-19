@@ -55,16 +55,20 @@ public class Sort<T extends Comparable<T>> {
         if (array.length == 0){
             return ;
         }
-        int maxId = 0;
+        int max = 0;
         for (int i = 1; i < array.length; i++){
-            if (array[i] > maxId){
-                maxId = i;
+            if (array[i] > max){
+                max = array[i];
             }
         }
-        int rounds = array[maxId] / base;
+        int rounds = 0;
+        while (max > 0){
+            max /= base;
+            rounds++;
+        }
+
         for (int i = 0; i <= rounds; i++){
             array = Arrays.copyOf(countSort(array, base, i, rounds), array.length);
-            System.out.println("in loop. i: " + i + "  rounds: " + rounds);
         }
         System.out.println("after loop");
     }
