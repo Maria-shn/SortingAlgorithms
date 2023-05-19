@@ -53,25 +53,32 @@ public class Sort<T extends Comparable<T>> {
             System.err.println("Invalid base");
             return;
         }
-        boolean done = false;
-        int place = 1;
-        while (done == false){
-            done = countSort(array, base, place);
-            place++;
+        //boolean done = false;
+        //int place = 1;
+        int maxId = 0;
+        for (int i = 1; i < array.length; i++){
+            if (array[i] > maxId){
+                maxId = i;
+            }
+        }
+        int rounds = array[maxId] / base;
+        for (int i = 0; i <= rounds; i++){
+            array = countSort(array, base, i, rounds);
+            
             //System.out.println("done is false");
         }
         //System.out.println("done is true");
     }
 
     // Perform count sort on an array of integers with a given base and place value
-    private static boolean countSort(int[] array, int base, int place){
-        boolean done = true;
-        int[] keys = new int[base];
+    private static int[] countSort(int[] array, int base, int pass, int rounds){
+        //boolean done = true;
+        int[] keys = new int[Math.min(base, rounds + 1)];
         for (int i = 0; i < base; i++){
             keys[i] = 0;
         }
         for (int i = 0; i < array.length; i++){
-            keys[keyOf(array[i], base, place)]++;
+            keys[keyOf(array[i], base, pass)]++;
         }
         for(int i = 1; i < keys.length; i++){
             keys[i] = keys[i] + keys[i-1];
@@ -79,21 +86,13 @@ public class Sort<T extends Comparable<T>> {
         int[] result = new int[array.length];
         int n = array.length - 1;
         for(int i = n; i >= 0; i--){
-            result[keys[keyOf(array[i], base, place)] - 1] = array[i];
-            keys[keyOf(array[i], base, place)]--;
+            result[keys[keyOf(array[i], base, pass)] - 1] = array[i];
+            keys[keyOf(array[i], base, pass)]--;
         }
-        for(int i = 0; i < result.length; i++){
-            array[i] = result[i];
-            if ((array[i] / ((int) Math.pow(base, place + 1))) != 0){
-                done = false;
-                System.out.print((array[i] / ((int) Math.pow(base, place + 1))) + " ");
-            }
-        }
-
-        System.out.println("place:" + place);
-        System.out.println("base" + base + " ");
-
-        return done;
+        return result;
+        //for(int i = 0; i < result.length; i++){
+         //   array[i] = result[i];
+        //}
     }
 
     private static int keyOf(int i, int base, int power){
