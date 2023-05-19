@@ -7,18 +7,16 @@ public class SortTest {
 
     
     public void radixTest(){
+        //@t is the power of 2 that will give the range of values allowed in the array
         for (int t = 1; t <= 3; t++){
             System.out.println(t);
             int[][] durationList = new int[7][NUMITER];
             for (int i = 0; i < NUMITER; i++) {
-                Integer[] array = generateRandomArray(500000, (int) Math.pow(2, t * 10));
-                int[] intArr = new int[array.length];
-                for (int j = 0; j < array.length; j++){
-                    intArr[j] = (int) array[j];
-                }
+                int[] array = generateRandomArray(500000, (int) Math.pow(2, t * 10));
                 long startTime = 0;
                 long endTime = 0;
                 for (int p = 0; p <= 6; p++){
+                    int[] intArr = Arrays.copyOf(array, array.length);
                     Sort sorter = new Sort();
                     startTime = System.currentTimeMillis();
                     sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
@@ -194,8 +192,8 @@ public class SortTest {
         return array;
     }
 
-    private Integer[] generateRandomArray(int size, int range) {
-        Integer[] array = new Integer[size];
+    private int[] generateRandomArray(int size, int range) {
+        int[] array = new int[size];
         for (int i = 0; i < size; i++) {
             array[i] = (int) ( Math.random()*Math.pow(2, range));
         }
