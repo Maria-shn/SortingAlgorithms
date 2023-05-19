@@ -8,29 +8,22 @@ public class SortTest {
     
     public void radixTest(){
         for (int t = 1; t <= 3; t++){
-            System.out.println(t);
             int[][] durationList = new int[7][NUMITER];
-
             for (int i = 0; i < 100; i++) {
-                //int[] array = generateRandomArray(NUMITER, (int) Math.pow(2, t * 10));
-                int[] array = generateRandomArray(100, 100);
+                int[] array = generateRandomArray(NUMITER, (int) Math.pow(2, t * 10));
                 int[] intArr = Arrays.copyOf(array, array.length);
                 long startTime = 0;
                 long endTime = 0;
-                Sort sorter2 = new Sort();
+                Sort sorter = new Sort();
                 startTime = System.currentTimeMillis();
-                sorter2.radixSort(intArr, 10);
+                sorter.radixSort(intArr, 2);
                 endTime = System.currentTimeMillis();
                 durationList[0][i] = (int) (endTime - startTime);
                 for (int p = 1; p <= 6; p++){
-                    System.out.println("here");
-                    Sort sorter = new Sort();
                     startTime = System.currentTimeMillis();
-                    //sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
-                    sorter.radixSort(intArr, 10);
+                    sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
                     endTime = System.currentTimeMillis();
                     durationList[p][i] = (int) (endTime - startTime);
-                    System.out.println("here");
 
                 }
             }
@@ -38,7 +31,7 @@ public class SortTest {
         }
     }
 
-    /*public void runPerformanceTests() {
+    public void runPerformanceTests() {
         Sort sorter = new Sort();
         long startTime = 0;
         long endTime = 0;
@@ -52,6 +45,7 @@ public class SortTest {
 
                 for (int algorithmIndex = 0; algorithmIndex < 5; algorithmIndex++) {
                     Integer[] copyArray = Arrays.copyOf(array, array.length);
+                    
                     switch (algorithmIndex) {
                         case 0:
                             startTime = System.currentTimeMillis();
@@ -74,8 +68,12 @@ public class SortTest {
                             endTime = System.currentTimeMillis();
                             break;
                         case 4:
+                        int[] intArr = new int[array.length];
+                        for(int j =0; j<array.length; j++){
+                            intArr[j] = (int) array[j];
+                        }
                             startTime = System.currentTimeMillis();
-                            sorter.radixSort(copyArray, 2);
+                            sorter.radixSort(intArr, (int) Math.pow(2, 20));
                             endTime = System.currentTimeMillis();
                             break;
                         case 5:
@@ -123,8 +121,12 @@ public class SortTest {
                             endTime = System.currentTimeMillis();
                             break;
                         case 4:
+                        int[] intArr = new int[array.length];
+                        for(int j =0; j<array.length; j++){
+                            intArr[j] = (int) array[j];
+                        }
                             startTime = System.currentTimeMillis();
-                            sorter.radixSort(copyArray);
+                            sorter.radixSort(intArr, (int) Math.pow(2, 20));
                             endTime = System.currentTimeMillis();
                             break;
                         case 5:
@@ -172,8 +174,12 @@ public class SortTest {
                             endTime = System.currentTimeMillis();
                             break;
                         case 4:
+                        int[] intArr = new int[array.length];
+                        for(int j =0; j<array.length; j++){
+                            intArr[j] = (int) array[j];
+                        }
                             startTime = System.currentTimeMillis();
-                            sorter.radixSort(copyArray);
+                            sorter.radixSort(intArr, (int) Math.pow(2, 20));
                             endTime = System.currentTimeMillis();
                             break;
                         case 5:
@@ -188,7 +194,7 @@ public class SortTest {
             // Calculate average and standard deviation
             calculateStats(durationList);
             }}
-    }*/
+    }
 
     private Integer[] generateRandomArray(int size) {
         Integer[] array = new Integer[size];
