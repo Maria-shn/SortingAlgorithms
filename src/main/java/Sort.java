@@ -29,16 +29,6 @@ public class Sort<T extends Comparable<T>> {
         mergeSortRecursive(array, 0, array.length-1);
     }}
 
-    // Perform radix sort on an array of integers with a given base
-    public static void radixSort(int[] array, int base){
-        boolean done = false;
-        int place = 0;
-        while (done == false){
-            done = countSort(array, base, place);
-            place++;
-        }
-    }
-
     // Set the threshold for using naive sort in quicksort
     public void setNaiveSortThreshold(int threshold){
         this.naiveSortThreshold = threshold;
@@ -54,6 +44,16 @@ public class Sort<T extends Comparable<T>> {
                     array[i] = array[j];
                 }
             }
+        }
+    }
+
+    // Perform radix sort on an array of integers with a given base
+    public static void radixSort(int[] array, int base){
+        boolean done = false;
+        int place = 0;
+        while (done == false){
+            done = countSort(array, base, place);
+            place++;
         }
     }
 
