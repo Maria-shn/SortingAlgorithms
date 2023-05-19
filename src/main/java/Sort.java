@@ -54,7 +54,9 @@ public class Sort<T extends Comparable<T>> {
         while (done == false){
             done = countSort(array, base, place);
             place++;
+            System.out.println("done is false");
         }
+        System.out.println("done is true");
     }
 
     // Perform count sort on an array of integers with a given base and place value

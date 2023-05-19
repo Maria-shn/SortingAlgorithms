@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SortTest",
+            "request": "launch",
+            "mainClass": "SortTest",
+            "projectName": "HW5"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

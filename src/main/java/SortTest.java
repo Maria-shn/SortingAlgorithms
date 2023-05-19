@@ -10,25 +10,31 @@ public class SortTest {
         //@t is the power of 2 that will give the range of values allowed in the array
         for (int t = 1; t <= 3; t++){
             System.out.println(t);
-            int[][] durationList = new int[7][NUMITER];
-            for (int i = 0; i < NUMITER; i++) {
-                int[] array = generateRandomArray(500000, (int) Math.pow(2, t * 10));
+            int[][] durationList = new int[7][10];
+            for (int i = 0; i < 10; i++) {
+                int[] array = generateRandomArray(10, (int) Math.pow(2, t * 10));
+                System.out.println("here");
                 long startTime = 0;
                 long endTime = 0;
                 for (int p = 0; p <= 6; p++){
                     int[] intArr = Arrays.copyOf(array, array.length);
+                    System.out.println("heree");
                     Sort sorter = new Sort();
                     startTime = System.currentTimeMillis();
                     sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
                     endTime = System.currentTimeMillis(); 
-                    if(i%25==0){
-                        System.out.println("i " + i);
-                    }
+                    System.out.println("never here");
                     durationList[p][i] = (int) (endTime - startTime);
                 }
+                System.out.println("hereee");
             }
             calculateStats(durationList);
         }
+    }
+    public static void main(String[] args) {
+        SortTest test = new SortTest();
+        test.radixTest();
+        //test.runPerformanceTests();
     }
 
     /*public void runPerformanceTests() {
@@ -195,7 +201,7 @@ public class SortTest {
     private int[] generateRandomArray(int size, int range) {
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
-            array[i] = (int) ( Math.random()*Math.pow(2, range));
+            array[i] = (int) ( Math.random()*range);
         }
         return array;
     }
