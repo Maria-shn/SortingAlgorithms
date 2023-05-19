@@ -64,7 +64,7 @@ public class Sort<T extends Comparable<T>> {
         int rounds = array[maxId] / base;
         for (int i = 0; i <= rounds; i++){
             array = Arrays.copyOf(countSort(array, base, i, rounds), array.length);
-            System.out.println("in loop");
+            System.out.println("in loop. i: " + i + "  rounds: " + rounds);
         }
         System.out.println("after loop");
     }
