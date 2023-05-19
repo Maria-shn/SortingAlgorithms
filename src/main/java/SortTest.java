@@ -11,22 +11,27 @@ public class SortTest {
             System.out.println(t);
             int[][] durationList = new int[7][NUMITER];
 
-            for (int i = 0; i < NUMITER; i++) {
-                int[] array = generateRandomArray(500000, (int) Math.pow(2, t * 10));
+            for (int i = 0; i < 100; i++) {
+                //int[] array = generateRandomArray(NUMITER, (int) Math.pow(2, t * 10));
+                int[] array = generateRandomArray(100, 100);
                 int[] intArr = Arrays.copyOf(array, array.length);
                 long startTime = 0;
                 long endTime = 0;
                 Sort sorter2 = new Sort();
                 startTime = System.currentTimeMillis();
-                sorter2.radixSort(intArr, 2);
+                sorter2.radixSort(intArr, 10);
                 endTime = System.currentTimeMillis();
                 durationList[0][i] = (int) (endTime - startTime);
                 for (int p = 1; p <= 6; p++){
+                    System.out.println("here");
                     Sort sorter = new Sort();
                     startTime = System.currentTimeMillis();
-                    sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
+                    //sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
+                    sorter.radixSort(intArr, 10);
                     endTime = System.currentTimeMillis();
                     durationList[p][i] = (int) (endTime - startTime);
+                    System.out.println("here");
+
                 }
             }
             calculateStats(durationList);

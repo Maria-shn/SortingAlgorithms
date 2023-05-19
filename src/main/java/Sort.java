@@ -1,5 +1,5 @@
 import java.lang.reflect.Array;
-
+import java.util.Arrays;
 public class Sort<T extends Comparable<T>> {
 
     private int naiveSortThreshold;
@@ -53,7 +53,7 @@ public class Sort<T extends Comparable<T>> {
             throw new IllegalArgumentException("The base must be greater than 1.");
         }
         if (array.length == 0){
-            return;
+            return ;
         }
         int maxId = 0;
         for (int i = 1; i < array.length; i++){
@@ -63,8 +63,10 @@ public class Sort<T extends Comparable<T>> {
         }
         int rounds = array[maxId] / base;
         for (int i = 0; i <= rounds; i++){
-            array = countSort(array, base, i, rounds);
+            array = Arrays.copyOf(countSort(array, base, i, rounds), array.length);
+            System.out.println("in loop");
         }
+        System.out.println("after loop");
     }
 
     // Perform count sort on an array of integers with a given base and place value
