@@ -50,11 +50,11 @@ public class Sort<T extends Comparable<T>> {
     // Perform radix sort on an array of integers with a given base
     public static void radixSort(int[] array, int base){
         if (base <= 1){
-            System.err.println("Invalid base");
+            throw new IllegalArgumentException("The base must be greater than 1.");
+        }
+        if (array.length == 0){
             return;
         }
-        //boolean done = false;
-        //int place = 1;
         int maxId = 0;
         for (int i = 1; i < array.length; i++){
             if (array[i] > maxId){
@@ -64,10 +64,7 @@ public class Sort<T extends Comparable<T>> {
         int rounds = array[maxId] / base;
         for (int i = 0; i <= rounds; i++){
             array = countSort(array, base, i, rounds);
-            
-            //System.out.println("done is false");
         }
-        //System.out.println("done is true");
     }
 
     // Perform count sort on an array of integers with a given base and place value
