@@ -44,6 +44,7 @@ public class Main{
                 System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + "std deviation: "+ sum2);
             }
         }
-    }*/
+    */
     
+}
 }
