@@ -3,9 +3,9 @@ import java.util.Random;
 public class Main{
     public static void main(String[] args) {
         SortTest test = new SortTest();
-        //test.radixTest();
+        test.radixTest();
         //test.runPerformanceTests();
-        System.out.println("Starting...");
+       /*System.out.println("Starting...");
         Sort s = new Sort();
         int NUMITER = 100;
         int size = 500000;
@@ -44,6 +44,6 @@ public class Main{
                 System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + "std deviation: "+ sum2);
             }
         }
-    }
+    }*/
     
 }
