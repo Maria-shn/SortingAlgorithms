@@ -16,14 +16,13 @@ public class SortTest {
                 long startTime = 0;
                 long endTime = 0;
                 Sort sorter = new Sort();
-                System.out.print("please");
                 startTime = System.currentTimeMillis();
                 sorter.radixSort(intArr, 2);
                 System.out.print("to work");
                 endTime = System.currentTimeMillis();
                 durationList[0][i] = (int) (endTime - startTime);
                 for (int p = 1; p <= 6; p++){
-
+                    intArr = Arrays.copyOf(array, array.length);
                     startTime = System.currentTimeMillis();
                     sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
                     endTime = System.currentTimeMillis();
@@ -211,8 +210,9 @@ public class SortTest {
 
     private int[] generateRandomArray(int size, int range) {
         int[] array = new int[size];
+        Random random = new Random();
         for (int i = 0; i < size; i++) {
-            array[i] = (int) ( Math.random()*Math.pow(2, range));
+            array[i] = random.nextInt(range);
         }
         return array;
     }
@@ -249,4 +249,5 @@ public class SortTest {
             System.out.println("Algorithm " + i + ": Average = " + average + ", Standard Deviation = " + standardDeviation);
         }
     }
+
 }
