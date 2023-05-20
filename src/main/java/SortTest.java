@@ -12,20 +12,20 @@ public class SortTest {
             for (int i = 0; i < 100; i++) {
                 System.out.println("i need this");
                 int[] array = generateRandomArray(NUMITER, (int) Math.pow(2, t * 10));
-                int[] intArr = Arrays.copyOf(array, array.length);
                 long startTime = 0;
                 long endTime = 0;
                 Sort sorter = new Sort();
-                startTime = System.currentTimeMillis();
-                sorter.radixSort(intArr, 2);
-                System.out.print("to work");
-                endTime = System.currentTimeMillis();
-                durationList[0][i] = (int) (endTime - startTime);
                 for (int p = 1; p <= 6; p++){
-                    intArr = Arrays.copyOf(array, array.length);
-                    startTime = System.currentTimeMillis();
-                    sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
-                    endTime = System.currentTimeMillis();
+                    int[] intArr = Arrays.copyOf(array, array.length);
+                    if(p==0){
+                        startTime = System.currentTimeMillis();
+                        sorter.radixSort(intArr, 2);
+                        endTime = System.currentTimeMillis();
+                    } else{
+                        startTime = System.currentTimeMillis();
+                        sorter.radixSort(intArr, (int) Math.pow(2, 5 * p));
+                        endTime = System.currentTimeMillis();
+                    }
                     durationList[p][i] = (int) (endTime - startTime);
 
                 }
