@@ -7,7 +7,12 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the class-based implementation
     public void quickSortClass(T[] array){
-        System.out.println("{");
+        System.out.print("{");
+        for (int i = 0; i < array.length; i++){
+            System.out.print(" " + array[i]);
+        }
+        System.out.println(" }");
+        System.out.println();
         if(array.length <= this.naiveSortThreshold){
             simpleSort(array, 0, array.length - 1);
         } else{
