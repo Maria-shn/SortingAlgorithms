@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class Sort<T extends Comparable<T>> {
 
@@ -14,7 +15,7 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the recitation-based implementation
     public void quickSortRecitation(T[] array){
-        if(array.length<= this.naiveSortThreshold){
+        if(array.length <= this.naiveSortThreshold){
             simpleSort(array, 0, array.length);
         } else{
             quickSortRecitation(array, 0, array.length-1);
@@ -29,7 +30,70 @@ public class Sort<T extends Comparable<T>> {
             mergeSortRecursive(array, 0, array.length-1);
         }}
 
-    // Perform radix sort on an array of integers with a given base
+        public static void radixSort(int[] array, int base){
+            if (base <= 1){
+                throw new IllegalArgumentException("The base must be greater than 1.");
+            }
+            //System.err.println("whhhaaat");
+            if (array.length == 0){
+                return ;
+            }
+            int maxId = 0;
+            for (int i = 1; i < array.length; i++){
+                if (array[i] > array[maxId]){
+                    maxId = i;
+                }
+            }
+            int max = array[maxId];
+            int rounds = 0;
+            while (max > 0){
+                max /= base;
+                rounds++;
+            }
+            max = array[maxId];
+   
+            for (int i = 0; i <= rounds; i++){
+                //System.err.println("work");
+                //int biggest = (i / (int) Math.pow(base, i));
+                array = Arrays.copyOf(countSort(array, base, i, max), array.length);
+            }
+            //System.out.println("after loop");
+        }
+   
+        // Perform count sort on an array of integers with a given base and place value
+        private static int[] countSort(int[] array, int base, int pass, int max){
+            int[] keys = new int[Math.min(base, max + 2)];
+            //System.err.println("why");
+            for (int i = 0; i < keys.length; i++){
+                keys[i] = 0;
+            }
+            //System.out.println("work fucker");
+            for (int i = 0; i < array.length; i++){
+                keys[keyOf(array[i], base, pass)]++;
+            }
+            //System.out.println("or else");
+            for(int i = 1; i < keys.length; i++){
+                keys[i] = keys[i] + keys[i-1];
+            }
+            //System.out.println("wont");
+            int[] result = new int[array.length];
+            int n = array.length - 1;
+            for(int i = n; i >= 0; i--){
+                result[keys[keyOf(array[i], base, pass)] - 1] = array[i];
+                keys[keyOf(array[i], base, pass)]--;
+            }
+            //System.err.println("you");
+            return result;
+            //for(int i = 0; i < result.length; i++){
+             //   array[i] = result[i];
+           //}
+       }
+       private static int keyOf(int i, int base, int power){
+           int x = (i / (int) Math.pow(base, power));
+            return (x % base);
+        }
+
+    /*// Perform radix sort on an array of integers with a given base
     public static void radixSort(int[] array, int base){
         boolean done = false;
         int place = 0;
@@ -37,7 +101,7 @@ public class Sort<T extends Comparable<T>> {
             done = countSort(array, base, place);
             place++;
         }
-    }
+    }*/
 
     // Set the threshold for using naive sort in quicksort
     public void setNaiveSortThreshold(int threshold){
@@ -56,7 +120,7 @@ public class Sort<T extends Comparable<T>> {
             }
         }
     }
-
+/* 
     // Perform count sort on an array of integers with a given base and place value
     private static boolean countSort(int[] array, int base, int place){
         boolean done = true;
@@ -90,7 +154,7 @@ public class Sort<T extends Comparable<T>> {
     private static int keyOf(int i, int base, int power){
         int x = (i / (int) Math.pow(base, power));
         return (x % base);
-    }
+    }*/
 
     // Perform quicksort using the class-based implementation on a subarray from index first to last
     public void quickSortClass(T[] array, int first, int last){

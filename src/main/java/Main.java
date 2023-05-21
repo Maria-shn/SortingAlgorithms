@@ -9,7 +9,7 @@ public class Main {
         int size = 500000;
         Random randomGen = new Random();
         //manually change the k, due to the limited capacity of the laptop
-        /*for (int k = 3; k < 4; k++) {
+        /*for (int k = 1; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
                 int base = (int) Math.pow(2, 5 * l);
                 if (l == 0) {
@@ -39,9 +39,10 @@ public class Main {
                 }
                 sum2/=NUMITER;
                 sum2=Math.sqrt(sum2);
-                System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + "std deviation: "+ sum2);
+                System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + " std deviation: "+ sum2);
             }
-        }*/
+        }
+    }*/
         int[] input_sizes = new int[]{10000, 50000, 100000, 500000, 1000000 };
         for(int i = 0; i < input_sizes.length; i++) {
             double[][] durationList = new double[6][NUMITER];
@@ -91,13 +92,13 @@ public class Main {
                             endTime = System.currentTimeMillis();
                             durationList[j][k] = (double) (endTime - startTime);
                         }
-                        if ((j == 3) && (i ==0)) {
+                        if ((j == 3) ) {
                             startTime = System.currentTimeMillis();
                             s.quickSortClass(b);
                             endTime = System.currentTimeMillis();
                             durationList[j][k] = (double) (endTime - startTime);
                         }
-                        if ((j == 4) && (i == 0)) {
+                        if ((j == 4)) {
                             startTime = System.currentTimeMillis();
                             s.quickSortRecitation(b);
                             endTime = System.currentTimeMillis();
