@@ -16,7 +16,7 @@ public class Main {
         Sort s = new Sort();
         int NUMITER = 100;
         int size = 500000;
-        Random randomGen = new Random();
+        Random randGen = new Random();
         for (int k = 1; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
                 int base = (int) Math.pow(2, 5 * l);
@@ -28,7 +28,7 @@ public class Main {
                 for (int i = 0; i < NUMITER; i++) {
                     int[] arr = new int[size];
                     for (int j = 0; j < size; j++) {
-                        arr[i] = Math.abs(randomGen.nextInt(upperBound));
+                        arr[i] = Math.abs(randGen.nextInt(upperBound));
                     }
                     long startTime, endTime;
                     startTime = System.currentTimeMillis();
@@ -47,7 +47,7 @@ public class Main {
                 }
                 sum2/=NUMITER;
                 sum2=Math.sqrt(sum2);
-                System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + " std deviation: "+ sum2);
+                System.out.println("size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + " std deviation: "+ sum2);
             
         }
     }
@@ -61,7 +61,6 @@ public static void testAll (int x){
         int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
-            //
             double[][] durationList = new double[6][NUMITER];
             
             for (int k = 0; k < NUMITER; k++) {
@@ -142,7 +141,7 @@ public static void testAll (int x){
                     }
                 }
             }
-            double[] iterresults = new double[6];
+            double[] iterResults = new double[6];
             double[] averages = new double[6];
             for(int k = 0; k < NUMITER; k++){
                 for(int j = 0; j < 6; j ++){
@@ -154,17 +153,17 @@ public static void testAll (int x){
             }
             for(int k = 0; k< NUMITER; k++){
                 for(int j= 0; j < 6; j++){
-                    iterresults[j]+=(averages[j]-durationList[j][k])*(averages[j]-durationList[j][k]);
+                    iterResults[j]+=(averages[j]-durationList[j][k])*(averages[j]-durationList[j][k]);
                 }
             }
             for(int j = 0; j < 6; j++){
-                iterresults[j]/=NUMITER;
-                iterresults[j]=Math.sqrt(iterresults[j]);
+                iterResults[j]/=NUMITER;
+                iterResults[j]=Math.sqrt(iterResults[j]);
             }
             System.out.println();
             System.out.println("Input size: "+ input_sizes[i]);
             for(int j = 0; j < 6; j ++){
-                System.out.println("Algorithm  "+ j+ " average of: " + averages[j] + " ,std deviation: "+ iterresults[j]);
+                System.out.println("Algorithm  "+ j+ " average of: " + averages[j] + " ,std deviation: "+ iterResults[j]);
             }
             System.out.println();
         }
