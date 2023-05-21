@@ -195,6 +195,8 @@ public class Sort<T extends Comparable<T>> {
                 T temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
+                i++;
+                j--;
             } else{
                 T temp = array[j + 1];
                 array[j + 1] = array[r];
