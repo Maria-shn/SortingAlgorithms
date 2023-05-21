@@ -2,13 +2,21 @@ import java.util.Random;
 import java.util.Arrays;
 
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Starting...");
+       // radixTest();
+        testAll(0);
+        //testAll(1);
+        //testAll(2);
+        
+    }
+
+
+    public static void radixTest(){
         Sort s = new Sort();
         int NUMITER = 100;
         int size = 500000;
         Random randomGen = new Random();
-        //manually change the k, due to the limited capacity of the laptop
         for (int k = 1; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
                 int base = (int) Math.pow(2, 5 * l);
@@ -40,29 +48,46 @@ public class Main {
                 sum2/=NUMITER;
                 sum2=Math.sqrt(sum2);
                 System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + " std deviation: "+ sum2);
-            }
+            
         }
     }
+}
+//@x=1 aarray needs to be sorted, if x=2 then reverse sorted
+public static void testAll (int x){
+    Sort s = new Sort();
+        int NUMITER = 100;
+        Random randomGen = new Random();
+    
         int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
             //
             double[][] durationList = new double[6][NUMITER];
             
-            for (int k = 0; k < 1; k++) {
-                //NUMITER
+            for (int k = 0; k < NUMITER; k++) {
+    
                 Integer[] array = new Integer[input_sizes[i]];
                 for(int j = 0 ; j < input_sizes[i]; j++){
                     array[j]= (Integer)(Math.abs(randomGen.nextInt()));
                 }
                 
                 long startTime, endTime;
-                for (int j = 3; j < 4; j++) {
-                    if (j == 0) {
+                for (int j = 0; j < 5; j++) {              
+                    if (j == 0) {   
                         int[] b = new int[input_sizes[i]];
                         for (int l = 0; l < input_sizes[i]; l++) {
                             b[l] = array[l];
-                        }                        
+                        }    
+                        if(x == 1 || x==2){
+                            Arrays.sort(b);
+                        }  
+                        if(x==2){
+                            for(int l = 0; l< input_sizes[i]/2; l++){
+                                int temp = b[l];
+                                b[l]=b[input_sizes[i]-l-1];
+                                b[input_sizes[i]-l-1]=temp;
+                            }
+                        } 
                         startTime = System.currentTimeMillis();
                         Sort.radixSort(b, 32768);
                         endTime = System.currentTimeMillis();
@@ -72,6 +97,16 @@ public class Main {
                         for (int l = 0; l < input_sizes[i]; l++) {
                             b[l] = array[l];
                         }
+                        if(x == 1 || x==2){
+                            Arrays.sort(b);
+                        }  
+                        if(x==2){
+                            for(int l = 0; l< input_sizes[i]/2; l++){
+                                Integer temp = b[l];
+                                b[l]=b[input_sizes[i]-l-1];
+                                b[input_sizes[i]-l-1]=temp;
+                            }
+                        } 
                         
                         if (j == 1) {
                             startTime = System.currentTimeMillis();
@@ -129,10 +164,11 @@ public class Main {
             System.out.println();
             System.out.println("Input size: "+ input_sizes[i]);
             for(int j = 0; j < 6; j ++){
-                System.out.println("Algorithm number "+ j+ " has average running time: " + averages[j] + "  and std deviation: "+ iterresults[j]);
+                System.out.println("Algorithm  "+ j+ " average of: " + averages[j] + " ,std deviation: "+ iterresults[j]);
             }
             System.out.println();
         }
-        }
+}
+    
     }
 
