@@ -12,12 +12,6 @@ public class Sort<T extends Comparable<T>> {
         } else{
             quickSortClass(array, 0, array.length - 1);
         }
-        System.out.print("{");
-        for (int i = 0; i < array.length; i++){
-            System.out.print(" " + array[i]);
-        }
-        System.out.println(" }");
-        System.out.println();
     }
 
     // Perform quicksort using the recitation-based implementation
@@ -34,7 +28,7 @@ public class Sort<T extends Comparable<T>> {
         if(array.length<= this.naiveSortThreshold){
             simpleSort(array, 0, array.length);
         } else{
-            mergeSortRecursive(array, 0, array.length-1);
+            mergeSortRecursive(array, 0, array.length - 1);
         }}
 
         public static void radixSort(int[] array, int base){
