@@ -4,6 +4,10 @@ import java.util.Arrays;
 public class Sort<T extends Comparable<T>> {
 
     private int naiveSortThreshold = 3;
+     // Set the threshold for using naive sort in quicksort
+     public void setNaiveSortThreshold(int threshold){
+        this.naiveSortThreshold = threshold;
+    }
 
     // Perform quicksort using the class-based implementation
     public void quickSortClass(T[] array){
@@ -41,10 +45,7 @@ public class Sort<T extends Comparable<T>> {
         }
     }
 
-    // Set the threshold for using naive sort in quicksort
-    public void setNaiveSortThreshold(int threshold){
-        this.naiveSortThreshold = threshold;
-    }
+   
 
     // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
     public void simpleSort(T[] array, int p, int r){
