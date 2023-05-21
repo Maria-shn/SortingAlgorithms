@@ -1,17 +1,15 @@
 import java.util.Random;
+import java.util.Arrays;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
-        SortTest test = new SortTest();
-        test.radixTest();
-        //test.runPerformanceTests();
-       /*System.out.println("Starting...");
+        System.out.println("Starting...");
         Sort s = new Sort();
         int NUMITER = 100;
         int size = 500000;
         Random randomGen = new Random();
-
-        for (int k = 1; k < 4; k++) {
+        //manually change the k, due to the limited capacity of the laptop
+        /*for (int k = 3; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
                 int base = (int) Math.pow(2, 5 * l);
                 if (l == 0) {
@@ -43,8 +41,103 @@ public class Main{
                 sum2=Math.sqrt(sum2);
                 System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + "std deviation: "+ sum2);
             }
+        }*/
+        int[] input_sizes = new int[]{10000, 50000, 100000, 500000, 1000000 };
+        for(int i = 0; i < input_sizes.length; i++) {
+            double[][] durationList = new double[6][NUMITER];
+            for (int k = 0; k < NUMITER; k++) {
+                Integer[] array = new Integer[input_sizes[i]];
+                for(int j = 0 ; j < input_sizes[i]; j++){
+                    array[j]= (Integer)(Math.abs(randomGen.nextInt()));
+                }
+
+                long startTime, endTime;
+                for (int j = 0; j < 6; j++) {
+                    if (j == 0) {
+                        int[] b = new int[input_sizes[i]];
+                        for (int l = 0; l < input_sizes[i]; l++) {
+                            b[l] = array[l];
+                        }
+                        Sort.radixSort(b, 32768);
+                        for(int l = 0; l< input_sizes[i]/2; l++){
+                            int aux = b[l];
+                            b[l]=b[input_sizes[i]-l-1];
+                            b[input_sizes[i]-l-1]=aux;
+                        }
+                        startTime = System.currentTimeMillis();
+                        Sort.radixSort(b, 32768);
+                        endTime = System.currentTimeMillis();
+                        durationList[j][k] = (double) (endTime - startTime);
+                    } else {
+                        Integer[] b = new Integer[input_sizes[i]];
+                        for (int l = 0; l < input_sizes[i]; l++) {
+                            b[l] = array[l];
+                        }
+                        Arrays.sort(b);
+                        for(int l = 0; l< input_sizes[i]/2; l++){
+                            Integer aux = b[l];
+                            b[l]=b[input_sizes[i]-l-1];
+                            b[input_sizes[i]-l-1]= aux;
+                        }
+                        if (j == 1) {
+                            startTime = System.currentTimeMillis();
+                            s.mergeSortIterative(b);
+                            endTime = System.currentTimeMillis();
+                            durationList[j][k] = (double) (endTime - startTime);
+                        }
+                        if (j == 2) {
+                            startTime = System.currentTimeMillis();
+                            s.mergeSortRecursive(b);
+                            endTime = System.currentTimeMillis();
+                            durationList[j][k] = (double) (endTime - startTime);
+                        }
+                        if ((j == 3) && (i ==0)) {
+                            startTime = System.currentTimeMillis();
+                            s.quickSortClass(b);
+                            endTime = System.currentTimeMillis();
+                            durationList[j][k] = (double) (endTime - startTime);
+                        }
+                        if ((j == 4) && (i == 0)) {
+                            startTime = System.currentTimeMillis();
+                            s.quickSortRecitation(b);
+                            endTime = System.currentTimeMillis();
+                            durationList[j][k] = (double) (endTime - startTime);
+                        }
+
+                        if (j == 5) {
+                            startTime = System.currentTimeMillis();
+                            Arrays.sort(b);
+                            endTime = System.currentTimeMillis();
+                            durationList[j][k] = (double) (endTime - startTime);
+                        }
+                    }
+                }
+            }
+            double[] iterresults = new double[6];
+            double[] averages = new double[6];
+            for(int k = 0; k < NUMITER; k++){
+                for(int j = 0; j < 6; j ++){
+                    averages[j]+=durationList[j][k];
+                }
+            }
+            for(int j = 0; j < 6; j++){
+                averages[j]/=NUMITER;
+            }
+            for(int k = 0; k< NUMITER; k++){
+                for(int j= 0; j < 6; j++){
+                    iterresults[j]+=(averages[j]-durationList[j][k])*(averages[j]-durationList[j][k]);
+                }
+            }
+            for(int j = 0; j < 6; j++){
+                iterresults[j]/=NUMITER;
+                iterresults[j]=Math.sqrt(iterresults[j]);
+            }
+            for(int j = 0; j < 6; j ++){
+                System.out.println("For "+ input_sizes[i]+ " inputs, the "+ j+ "th algorithm has the avg running time of" + averages[j] + " the std deviation is "+ iterresults[j]);
+            }
         }
-    */
-    
-}
-}
+        }
+
+
+    }
+

@@ -165,11 +165,8 @@ public class Sort<T extends Comparable<T>> {
             mergeSortRecursive(array, p, q);
             mergeSortRecursive(array, q+1, r);
             merge(array, p, q, r);
-            System.out.print("{ ");
             for (int i = 0; i < array.length; i++){
-                System.out.print(array[i] + " ");
             }
-            System.out.println("}");
         }
     }
 
