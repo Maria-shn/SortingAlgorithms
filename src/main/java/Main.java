@@ -47,14 +47,15 @@ public class Main {
         for(int i = 0; i < input_sizes.length; i++) {
             //
             double[][] durationList = new double[6][NUMITER];
-            for (int k = 0; k < NUMITER; k++) {
+            for (int k = 0; k < 1; k++) {
+                //NUMITER
                 Integer[] array = new Integer[input_sizes[i]];
                 for(int j = 0 ; j < input_sizes[i]; j++){
                     array[j]= (Integer)(Math.abs(randomGen.nextInt()));
                 }
                 
                 long startTime, endTime;
-                for (int j = 3; j < 4; j++) {
+                for (int j = 3; j < 5; j++) {
                     if (j == 0) {
                         int[] b = new int[input_sizes[i]];
                         for (int l = 0; l < input_sizes[i]; l++) {

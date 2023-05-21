@@ -198,7 +198,7 @@ public class Sort<T extends Comparable<T>> {
                 T temp = array[j + 1];
                 array[j + 1] = array[r];
                 array[r] = temp;
-                return j + 1;
+                return (j + 1);
             }
         }
     }
@@ -206,19 +206,19 @@ public class Sort<T extends Comparable<T>> {
     // Partition the array using the recitation-based implementation of quicksort
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
-        int i = p - 1;
+        int i = p;
         for(int j = p; j <= r - 1; j++){
             if(array[j].compareTo(x) <= 0){
-                i++;
                 T temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
+                i++;
             }
-            T temp = array[i + 1];
-            array[i + 1] = array[r];
+            T temp = array[i];
+            array[i] = array[r];
             array[r] = temp;
         }
-        return i + 1;
+        return i;
     }
 
 
