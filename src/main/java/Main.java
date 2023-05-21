@@ -44,10 +44,11 @@ public class Main {
         }
     }*/
         int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
+        System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
             //
             double[][] durationList = new double[6][NUMITER];
-            System.out.println("Results:");
+            
             for (int k = 0; k < 1; k++) {
                 //NUMITER
                 Integer[] array = new Integer[input_sizes[i]];
