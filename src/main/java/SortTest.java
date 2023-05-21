@@ -10,7 +10,6 @@ public class SortTest {
         for (int t = 1; t <= 3; t++){
             int[][] durationList = new int[7][NUMITER];
             for (int i = 0; i < 100; i++) {
-                System.out.println("i need this");
                 int[] array = generateRandomArray(NUMITER, (int) Math.pow(2, t * 10));
                 long startTime = 0;
                 long endTime = 0;
