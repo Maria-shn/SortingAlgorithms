@@ -6,9 +6,9 @@ public class SortTest {
     public static void main(String[] args) {
         SortTest test = new SortTest();
         test.radixTest();
-        //test.testAll(0);
-        //test.testAll(1);
-        //test.testAll(2);
+        test.testAll(0);
+        test.testAll(1);
+        test.testAll(2);
         
     }
 
