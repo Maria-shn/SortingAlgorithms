@@ -207,7 +207,7 @@ public class Sort<T extends Comparable<T>> {
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
         int i = p - 1;
-        for(int j = p; j < r - 1; j++){
+        for(int j = p; j <= r - 1; j++){
             if(array[j].compareTo(x) <= 0){
                 i++;
                 T temp = array[i];
