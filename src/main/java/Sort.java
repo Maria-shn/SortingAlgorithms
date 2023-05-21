@@ -48,13 +48,14 @@ public class Sort<T extends Comparable<T>> {
    
 
     // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
-    public void simpleSort(T[] array, int p, int r){
-        for(int i = 0; i < array.length; i++){
-            for (int j = i+1; j < array.length; j++){
-                if(array[j].compareTo(array[i]) < 0){
+    public void simpleSort(T[] array, int p, int r) {
+        for (int i = 0; i < r - p; i++) {
+            for (int j = p; j < r - i; j++) {
+                if (array[j].compareTo(array[j + 1]) > 0) {
+                    // swap array[j] and array[j+1]
                     T temp = array[j];
-                    array[j] = array[i];
-                    array[i] = temp;
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
         }

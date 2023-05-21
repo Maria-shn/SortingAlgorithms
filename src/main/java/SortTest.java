@@ -5,10 +5,10 @@ public class SortTest {
 
     public static void main(String[] args) {
         SortTest test = new SortTest();
-       // radixTest();
-        test.testAll(0);
-        //testAll(1);
-        //testAll(2);
+        test.radixTest();
+        //test.testAll(0);
+        //test.testAll(1);
+        //test.testAll(2);
         
     }
 
@@ -20,6 +20,7 @@ public class SortTest {
         Random randGen = new Random();
         for (int k = 1; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
+                
                 int base = (int) Math.pow(2, 5 * l);
                 if (l == 0) {
                     base = 2;
@@ -62,17 +63,25 @@ public void testAll (int x){
         int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
+            
             double[][] durationList = new double[6][NUMITER];
             
             for (int k = 0; k < NUMITER; k++) {
-    
+                
                 Integer[] array = new Integer[input_sizes[i]];
                 for(int j = 0 ; j < input_sizes[i]; j++){
                     array[j]= (Integer)(Math.abs(randomGen.nextInt()));
                 }
                 
                 long startTime, endTime;
-                for (int j = 0; j < 5; j++) {              
+                for (int j = 0; j < 6; j++) {  
+                    // used to avoid the quicksort algorithms to avoid the crash
+                    /*if(j== 3 ){
+                        j++;
+                    }
+                    if(j== 4 ){
+                        j++;
+                    }*/
                     if (j == 0) {   
                         int[] b = new int[input_sizes[i]];
                         for (int l = 0; l < input_sizes[i]; l++) {
