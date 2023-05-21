@@ -9,7 +9,7 @@ public class Main {
         int size = 500000;
         Random randomGen = new Random();
         //manually change the k, due to the limited capacity of the laptop
-        /*for (int k = 1; k < 4; k++) {
+        for (int k = 1; k < 4; k++) {
             for (int l = 0; l <= 6; l++) {
                 int base = (int) Math.pow(2, 5 * l);
                 if (l == 0) {
@@ -42,7 +42,7 @@ public class Main {
                 System.out.println("repetition: " +NUMITER+ ", size of numbers: " + upperBound + ", base: "+ base+ " avg: " + sum + " std deviation: "+ sum2);
             }
         }
-    }*/
+    }
         int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
