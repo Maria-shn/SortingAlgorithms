@@ -43,7 +43,7 @@ public class Main {
             }
         }
     }*/
-        int[] input_sizes = {100, 10000, 50000, 100000, 500000, 1000000};
+        int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         System.out.println("Results:");
         for(int i = 0; i < input_sizes.length; i++) {
             //
@@ -57,7 +57,7 @@ public class Main {
                 }
                 
                 long startTime, endTime;
-                for (int j = 4; j < 5; j++) {
+                for (int j = 3; j < 4; j++) {
                     if (j == 0) {
                         int[] b = new int[input_sizes[i]];
                         for (int l = 0; l < input_sizes[i]; l++) {
