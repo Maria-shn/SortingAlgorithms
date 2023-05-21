@@ -206,7 +206,7 @@ public class Sort<T extends Comparable<T>> {
     // Partition the array using the recitation-based implementation of quicksort
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
-        int i = p-1;
+        int i = p - 1;
         for(int j =p; j<r-1; j++){
             if(array[i].compareTo(x)<0){
                 i++;
