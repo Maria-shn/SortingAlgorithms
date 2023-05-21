@@ -43,10 +43,11 @@ public class Main {
             }
         }
     }*/
-        int[] input_sizes = new int[]{10000, 50000, 100000, 500000, 1000000};
+        int[] input_sizes = {10000, 50000, 100000, 500000, 1000000};
         for(int i = 0; i < input_sizes.length; i++) {
             //
             double[][] durationList = new double[6][NUMITER];
+            System.out.println("Results:");
             for (int k = 0; k < 1; k++) {
                 //NUMITER
                 Integer[] array = new Integer[input_sizes[i]];
@@ -55,7 +56,7 @@ public class Main {
                 }
                 
                 long startTime, endTime;
-                for (int j = 3; j < 5; j++) {
+                for (int j = 3; j < 4; j++) {
                     if (j == 0) {
                         int[] b = new int[input_sizes[i]];
                         for (int l = 0; l < input_sizes[i]; l++) {
@@ -124,8 +125,10 @@ public class Main {
                 iterresults[j]/=NUMITER;
                 iterresults[j]=Math.sqrt(iterresults[j]);
             }
+            System.out.println();
+            System.out.println("Input size: "+ input_sizes[i]);
             for(int j = 0; j < 6; j ++){
-                System.out.println("For "+ input_sizes[i]+ " inputs, the "+ j+ "th algorithm has the avg running time of " + averages[j] + " the std deviation is "+ iterresults[j]);
+                System.out.println("Algorithm number "+ j+ " has average running time: " + averages[j] + "  and std deviation: "+ iterresults[j]);
             }
             System.out.println();
         }
