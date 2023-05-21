@@ -33,7 +33,7 @@ public class SortTest {
                     }
                     long startTime, endTime;
                     startTime = System.currentTimeMillis();
-                    Sort.radixSort(arr, base);
+                    s.radixSort(arr, base);
                     endTime= System.currentTimeMillis();
                     avg[i]= (double)(endTime-startTime);
                 }
@@ -89,7 +89,7 @@ public void testAll (int x){
                             }
                         } 
                         startTime = System.currentTimeMillis();
-                        Sort.radixSort(b, 32768);
+                        s.radixSort(b, 32768);
                         endTime = System.currentTimeMillis();
                         durationList[j][k] = (double) (endTime - startTime);
                     } else {
