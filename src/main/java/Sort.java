@@ -158,10 +158,10 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the class-based implementation on a subarray from index first to last
     public void quickSortClass(T[] array, int first, int last){
-        if (first - last > 3){
+        if (last - first > 3){
             int q = partitionClass(array, first, last);
-            quickSortClass(array, first, q-1);
-            quickSortClass(array, q+1, last);
+            quickSortClass(array, first, q - 1);
+            quickSortClass(array, q + 1, last);
         }else{
             simpleSort(array, first, last);
         }
@@ -169,7 +169,7 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the recitation-based implementation on a subarray from index first to last
     public void quickSortRecitation(T[] array, int first, int last){
-        if (first - last > 3){
+        if (last - first > 3){
             int q = partitionRecitation(array, first, last);
             quickSortClass(array, first, q - 1);
             quickSortClass(array, q + 1, last);
