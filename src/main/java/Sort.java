@@ -46,12 +46,12 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
     public void simpleSort(T[] array, int p, int r){
-        for(int i = 0; i<array.length; i++){
-            for (int j = i+1; j<array.length; j++){
-                if(array[j].compareTo(array[i])<0){
+        for(int i = 0; i < array.length; i++){
+            for (int j = i+1; j < array.length; j++){
+                if(array[j].compareTo(array[i]) < 0){
                     T temp = array[j];
                     array[j] = array[i];
-                    array[i] = array[j];
+                    array[i] = temp;
                 }
             }
         }
@@ -107,8 +107,8 @@ public class Sort<T extends Comparable<T>> {
     public void quickSortRecitation(T[] array, int first, int last){
         if (first - last > 3){
             int q = partitionRecitation(array, first, last);
-            quickSortClass(array, first, q-1);
-            quickSortClass(array, q+1, last);
+            quickSortClass(array, first, q - 1);
+            quickSortClass(array, q + 1, last);
         }else{
             simpleSort(array, first, last);
         }
@@ -117,24 +117,24 @@ public class Sort<T extends Comparable<T>> {
     // Partition the array using the class-based implementation of quicksort
     public int partitionClass(T[] array, int p, int r){
         T x = array[r];
-        int j = r-1;
-        int i = p+1;
+        int j = r - 1;
+        int i = p;
         while(true){
-            while(array[j].compareTo(x)>0 && j>p){
+            while (array[j].compareTo(x) > 0 && j > p){
                 j--;
             }
-            while(array[1].compareTo(x)<0 && i<r){
-                i--;
+            while (array[i].compareTo(x) <= 0 && i < r){
+                i++;
             }
-            if(i<j){
+            if (i < j){
                 T temp = array[i];
-                array[i]=array[j];
+                array[i] = array[j];
                 array[j] = temp;
             } else{
-                T temp = array[i];
-                array[i]=array[j+1];
-                array[j+1] = temp;
-                return j+1;
+                T temp = array[j + 1];
+                array[j + 1] = array[r];
+                array[r] = temp;
+                return j + 1;
             }
         }
     }
