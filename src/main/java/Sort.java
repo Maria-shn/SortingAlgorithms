@@ -3,23 +3,22 @@ import java.util.Arrays;
 
 public class Sort<T extends Comparable<T>> {
 
-    private int naiveSortThreshold = 3;
+    private int naiveSortThreshold;
 
     // Perform quicksort using the class-based implementation
     public void quickSortClass(T[] array){
-        if(array.length <= this.naiveSortThreshold){
-            simpleSort(array, 0, array.length - 1);
+        if(array.length<= this.naiveSortThreshold){
+            simpleSort(array, 0, array.length);
         } else{
-            quickSortClass(array, 0, array.length - 1);
-        }
-    }
+            quickSortClass(array, 0, array.length-1);
+        }}
 
     // Perform quicksort using the recitation-based implementation
     public void quickSortRecitation(T[] array){
         if(array.length <= this.naiveSortThreshold){
-            simpleSort(array, 0, array.length - 1);
+            simpleSort(array, 0, array.length);
         } else{
-            quickSortRecitation(array, 0, array.length - 1);
+            quickSortRecitation(array, 0, array.length-1);
         }
     }
 
@@ -28,7 +27,7 @@ public class Sort<T extends Comparable<T>> {
         if(array.length<= this.naiveSortThreshold){
             simpleSort(array, 0, array.length);
         } else{
-            mergeSortRecursive(array, 0, array.length - 1);
+            mergeSortRecursive(array, 0, array.length-1);
         }}
 
         public static void radixSort(int[] array, int base){
@@ -111,8 +110,8 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform a simple sort (e.g., bubble sort) on the given array from index p to r
     public void simpleSort(T[] array, int p, int r){
-        for(int i = 0; i <= r; i++){
-            for (int j = i + 1; j <= r; j++){
+        for(int i = 0; i < array.length; i++){
+            for (int j = i+1; j < array.length; j++){
                 if(array[j].compareTo(array[i]) < 0){
                     T temp = array[j];
                     array[j] = array[i];
@@ -159,7 +158,7 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the class-based implementation on a subarray from index first to last
     public void quickSortClass(T[] array, int first, int last){
-        if (last - first > naiveSortThreshold){
+        if (last - first > 2){
             int q = partitionClass(array, first, last);
             quickSortClass(array, first, q - 1);
             quickSortClass(array, q + 1, last);
@@ -170,7 +169,7 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the recitation-based implementation on a subarray from index first to last
     public void quickSortRecitation(T[] array, int first, int last){
-        if (last - first > naiveSortThreshold){
+        if (last - first > 2){
             int q = partitionRecitation(array, first, last);
             quickSortClass(array, first, q - 1);
             quickSortClass(array, q + 1, last);
@@ -180,48 +179,45 @@ public class Sort<T extends Comparable<T>> {
     }
 
     // Partition the array using the class-based implementation of quicksort
-    public int partitionClass(T[] array, int p, int r){
+    public int partitionClass(T[] array, int p, int r) {
         T x = array[r];
-        int j = r - 1;
-        int i = p;
-        while(true){
-            while (j >= p && array[j].compareTo(x) > 0){
+        int j = r;
+        int i = p - 1;
+        while (true) {
+            do {
                 j--;
-            }
-            while (i < r && array[i].compareTo(x) <= 0){
+            } while (j >= p && array[j].compareTo(x) > 0);
+            do {
                 i++;
-            }
-            if (i < j){
+            } while (i <= r && array[i].compareTo(x) <= 0);
+            if (i < j) {
                 T temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
-                i++;
-                j--;
-            } else{
+            } else {
                 T temp = array[j + 1];
                 array[j + 1] = array[r];
                 array[r] = temp;
-                return (j + 1);
+                return j + 1;
             }
         }
     }
-
     // Partition the array using the recitation-based implementation of quicksort
     public int partitionRecitation(T[] array, int p, int r){
         T x = array[r];
-        int i = p;
-        for(int j = p; j <= r - 1; j++){
+        int i = p - 1;
+        for(int j = p; j < r - 1; j++){
             if(array[j].compareTo(x) <= 0){
+                i++;
                 T temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
-                i++;
             }
-            T temp = array[i];
-            array[i] = array[r];
+            T temp = array[i + 1];
+            array[i + 1] = array[r];
             array[r] = temp;
         }
-        return i;
+        return i + 1;
     }
 
 
