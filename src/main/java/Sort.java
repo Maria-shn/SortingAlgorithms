@@ -12,6 +12,12 @@ public class Sort<T extends Comparable<T>> {
         } else{
             quickSortClass(array, 0, array.length - 1);
         }
+        System.out.print("{");
+        for (int i = 0; i < array.length; i++){
+            System.out.print(" " + array[i]);
+        }
+        System.out.println(" }");
+        System.out.println();
     }
 
     // Perform quicksort using the recitation-based implementation
@@ -159,12 +165,6 @@ public class Sort<T extends Comparable<T>> {
 
     // Perform quicksort using the class-based implementation on a subarray from index first to last
     public void quickSortClass(T[] array, int first, int last){
-        System.out.print("{");
-        for (int i = 0; i < array.length; i++){
-            System.out.print(" " + array[i]);
-        }
-        System.out.println(" }");
-        System.out.println();
         if (last - first > naiveSortThreshold){
             int q = partitionClass(array, first, last);
             quickSortClass(array, first, q - 1);
